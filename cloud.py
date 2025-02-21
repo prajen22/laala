@@ -6,20 +6,16 @@ from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 import os
 
-# ✅ Connect to Elastic Cloud with API Key
-ELASTICSEARCH_URL = "https://e4d509b4d8fb49a78a19a571c1b65bba.us-central1.gcp.cloud.es.io:443"
-API_KEY = "dHlnVEtaVUJCYWNWcEcwczVQcE46d2tOTURWLXBUSmFvQkg1bmxma1VkQQ=="  # Replace with your actual API key
-
 es = Elasticsearch(
-    ELASTICSEARCH_URL,
-    api_key=API_KEY
+    st.secrets["elasticsearch"]["url"],
+    api_key=st.secrets["elasticsearch"]["api_key"]
 )
 
-# ✅ Initialize ImageKit SDK
+# Accessing ImageKit Secrets
 imagekit = ImageKit(
-    private_key='private_lJZeBuXRen5WI4WpjNRjf1DZW4E=',
-    public_key='public_djwqIa18ksHGZEGTJk59MFOp/mA=',
-    url_endpoint='https://ik.imagekit.io/46k1lkvq2'
+    private_key=st.secrets["imagekit"]["private_key"],
+    public_key=st.secrets["imagekit"]["public_key"],
+    url_endpoint=st.secrets["imagekit"]["url_endpoint"]
 )
 
 # ✅ Elasticsearch Index Name
